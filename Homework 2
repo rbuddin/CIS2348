@@ -8,12 +8,16 @@ def parse_date(date_str):
     monthDict = {"January" : 1, "February" : 2, "March" : 3, "April" : 4, 
                  "May" : 5, "June" : 6, "July" : 7, "August" : 8, "September" : 9, 
                  "October" : 10, "November" : 11, "December" : 12}
+    year = date_str[date_str.find(',') + 2 : ]
+    month, day = date_str[ : date_str.find(',')].split(" ")
+    month = monthDict[month.title()]
+    return '{}/{}/{}'.format(month, day, year)
 # Evalulate
-year = date_str[date_str.find(',') + 2 : ]
-month, day = datestr[ : date_str.find(',')].split(" ")
-month = monthDict[month.title()]
-return '{}/{}/{}'.format(month, day, year)
+
 # Read input
 with open("inputDates.txt", 'r') as file:
     dates = [parse_date(date) for date in file if is_valid_date(date)]
+# Create new dates in 'parsedDates.txt'
+with open("parsedDates.txt", 'w') as file:
+    file.write(''.join(dates))
 
