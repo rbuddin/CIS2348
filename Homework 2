@@ -2,15 +2,18 @@ import re
 # Valid date with pattern and date_str
 def is_valid_date(date_str):
     pattern = r"^(January|February|March|April|May|June|July|August|September|October|November|December)\s\d{1,2},\s\d{4}$"
-    return re.match(pattern, date_tr) is not None
+    return re.match(pattern, date_str) is not None
 # Define numerical value for dates
 def parse_date(date_str):
     monthDict = {"January" : 1, "February" : 2, "March" : 3, "April" : 4, 
-                 "May" : 5, "June" : , "July" : 7, "August" : 8, "September" : 9, 
+                 "May" : 5, "June" : 6, "July" : 7, "August" : 8, "September" : 9, 
                  "October" : 10, "November" : 11, "December" : 12}
 # Evalulate
 year = date_str[date_str.find(',') + 2 : ]
 month, day = datestr[ : date_str.find(',')].split(" ")
 month = monthDict[month.title()]
 return '{}/{}/{}'.format(month, day, year)
+# Read input
+with open("inputDates.txt", 'r') as file:
+    dates = [parse_date(date) for date in file if is_valid_date(date)]
 
